@@ -1,0 +1,18 @@
+node_modules
+.tmp
+.sass-cache
+
+platforms
+plugins
+*.swp
+*.swo
+*.log
+*.DS_Store
+
+www
+.idea
+.temp
+<%= appPath %>/bower_components
+coverage
+
+app/scripts/configuration.js
