@@ -9,7 +9,7 @@
     <div class="sport-equipment" ion-item *ngFor="let item of sportsEquipment">
       <ion-title class="sport-equipment__title">{{item.title}}</ion-title>
       <div class="sport-equipment__info">
-        <ion-img width="50" height="50" src="{{item.preview}}"></ion-img>
+        <ion-img src="{{item.preview}}" class="sport-equipment__info__img"></ion-img>
         <div>
           <p>{{item.price}} руб</p>
           <p>{{item.availability}}</p>
