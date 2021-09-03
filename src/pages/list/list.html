@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list>
-    <div *ngFor="let item of sportsEquipment" ion-item class="sport-equipment">
+    <div *ngFor="let item of sportsEquipment" ion-item class="sport-equipment" (click)="itemTapped($event, item)">
       <div class="sport-equipment__title">{{item.title}}</div>
       <div class="sport-equipment__info">
         <ion-img src="{{item.preview}}" class="sport-equipment__info__img"></ion-img>

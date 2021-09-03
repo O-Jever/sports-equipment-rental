@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
-
-import { NavController, NavParams } from "ionic-angular";
+import { NavController } from "ionic-angular";
 import { ISportsEquipment } from "../../models/app";
+import { ItemDetailsPage } from "../item-details/item-details";
 
 @Component({
   selector: "page-list",
@@ -10,7 +10,7 @@ import { ISportsEquipment } from "../../models/app";
 export class ListPage {
   public sportsEquipment: Array<ISportsEquipment>;
 
-  constructor() {
+  constructor(private navCtrl: NavController) {
     this.sportsEquipment = [
       {
         title: "ALPIN Велотренажер Actuel B-160",
@@ -133,5 +133,9 @@ export class ListPage {
         price: 1050,
       },
     ];
+  }
+
+  public itemTapped(event, item): void {
+    this.navCtrl.push(ItemDetailsPage, { item });
   }
 }
