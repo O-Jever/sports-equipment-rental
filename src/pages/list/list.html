@@ -1,20 +1,20 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>My First List</ion-title>
+    <ion-title>Спортивный инвентарь</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon name="{{item.icon}}" item-left></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-right>
-        {{item.note}}
+    <div *ngFor="let item of sportsEquipment" ion-item class="sport-equipment">
+      <div class="sport-equipment__title">{{item.title}}</div>
+      <div class="sport-equipment__info">
+        <ion-img src="{{item.preview}}" class="sport-equipment__info__img"></ion-img>
+        <div>
+          <p>{{item.price}} руб</p>
+          <p>{{item.availability}}</p>
+        </div>
       </div>
-    </button>
+    </div>
   </ion-list>
 </ion-content>
