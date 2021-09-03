@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Подробнее о спортивном инвентаре</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="selectedItem">
+  <div class="selected-item">
+    <h3 class="selected-item__title">{{selectedItem.title}}</h3>
+    <div class="selected-item__info">
+      <ion-img src="{{selectedItem.preview}}" class="selected-item__info__img"></ion-img>
+      <div>
+        <p>{{selectedItem.seasonality}}</p>
+        <p>{{selectedItem.type}}</p>
+      </div>
+      <div>
+        <p>{{selectedItem.price}} руб</p>
+        <p>{{selectedItem.availability}}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>
