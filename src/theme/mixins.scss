@@ -1,4 +1,4 @@
-@import './variables';
+@import "./variables";
 
 @mixin flex($justify: space-between, $align: center, $flex-direction: row) {
   display: flex;
