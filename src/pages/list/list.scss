@@ -1,6 +1,10 @@
 @import "../../theme/mixins.scss";
 
 .sport-equipment {
+  &__title {
+    font-weight: bold;
+  }
+
   &__info {
     @include flex();
 
