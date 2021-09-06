@@ -10,8 +10,11 @@
     <div class="selected-item__info">
       <ion-img src="{{selectedItem.preview}}" class="selected-item__info__img"></ion-img>
       <div>
-        <p>{{selectedItem.seasonality}}</p>
-        <p>{{selectedItem.type}}</p>
+        <p>Сеззонность: {{selectedItem.seasonality}}</p>
+        <p>Тип: {{selectedItem.type}}</p>
+        <p>Страна-производитель: {{selectedItem.manufacturerCountry}}</p>
+        <p>Бренд: {{selectedItem.manufacturer}}</p>
+        <p>Вес: {{selectedItem.weight}} грамм</p>
       </div>
       <div>
         <p>{{selectedItem.price}} руб</p>
