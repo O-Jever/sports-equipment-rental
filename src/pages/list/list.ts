@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { NavController, NavParams } from "ionic-angular";
+import { AlertController, NavController, NavParams } from "ionic-angular";
 import { ISportsEquipment } from "../../models/app";
 
 @Component({
@@ -9,8 +9,13 @@ import { ISportsEquipment } from "../../models/app";
 })
 export class ListPage {
   public sportsEquipment: Array<ISportsEquipment>;
+  public filterTerm: string;
 
-  constructor() {
+  constructor(private alertCtrl: AlertController) {
+    this.loadData();
+  }
+
+  private loadData(): void {
     this.sportsEquipment = [
       {
         title: "ALPIN Велотренажер Actuel B-160",
@@ -133,5 +138,46 @@ export class ListPage {
         price: 1050,
       },
     ];
+  }
+
+  public openDialog(): void {
+    let alert = this.alertCtrl.create();
+    alert.setTitle("Типы");
+
+    alert.addInput({
+      type: "checkbox",
+      label: "Велотренажер",
+      value: "Велотренажер",
+    });
+
+    alert.addInput({
+      type: "checkbox",
+      label: "Батут",
+      value: "Батут",
+    });
+
+    alert.setTitle("Доступность");
+
+    alert.addInput({
+      type: "checkbox",
+      label: "В наличии",
+      value: "В наличии",
+    });
+
+    alert.addInput({
+      type: "checkbox",
+      label: "На складе",
+      value: "На складе",
+    });
+
+    alert.addButton("Отмена");
+    alert.addButton({
+      text: "Применить",
+      handler: (data) => {
+        console.log("Checkbox data:", data);
+      },
+    });
+
+    alert.present();
   }
 }
