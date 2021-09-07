@@ -180,7 +180,12 @@ export class ListPage {
     ];
   }
 
-  public itemTapped(event, item): void {
+  /**
+   * Переход на страницу с подробным описанием спортивного инвентаря
+   * @param {ISportsEquipment} item - информация об спортивном инвентаре
+   */
+
+  public itemTapped(item: ISportsEquipment): void {
     this.navCtrl.push(ItemDetailsPage, { item });
   }
 }
