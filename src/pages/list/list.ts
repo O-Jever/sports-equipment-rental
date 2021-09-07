@@ -4,7 +4,7 @@ import { ISportsEquipment } from "../../models/app";
 import { ItemDetailsPage } from "../item-details/item-details";
 
 @Component({
-  //selector: "page-list",
+  selector: "page-list",
   templateUrl: "list.html",
 })
 export class ListPage {
