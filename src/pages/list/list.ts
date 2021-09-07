@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 
-import { AlertController, NavController, NavParams } from "ionic-angular";
+import { ModalController, NavController, NavParams } from "ionic-angular";
 import { ISportsEquipment } from "../../models/app";
+import { FilterPage } from "../filter/filter";
 
 @Component({
   selector: "page-list",
@@ -10,13 +11,14 @@ import { ISportsEquipment } from "../../models/app";
 export class ListPage {
   public sportsEquipment: Array<ISportsEquipment>;
   public filterTerm: string;
+  private filter;
 
-  constructor(private alertCtrl: AlertController) {
-    this.loadData();
+  constructor(private modalCtrl: ModalController) {
+    this.sportsEquipment = this.loadData();
   }
 
-  private loadData(): void {
-    this.sportsEquipment = [
+  private loadData(): ISportsEquipment[] {
+    return [
       {
         title: "ALPIN Велотренажер Actuel B-160",
         preview: "../assets/imgs/logo.png",
@@ -141,43 +143,19 @@ export class ListPage {
   }
 
   public openDialog(): void {
-    let alert = this.alertCtrl.create();
-    alert.setTitle("Типы");
+    const modal = this.modalCtrl.create(FilterPage, { filter: this.filter });
+    modal.present();
 
-    alert.addInput({
-      type: "checkbox",
-      label: "Велотренажер",
-      value: "Велотренажер",
+    modal.onDidDismiss((data) => {
+      this.filter = data;
+      this.sportsEquipment = this.sportsEquipment.filter((element) => {
+        for (let key in element) {
+          if (data.find((control) => control.label === element[key])) {
+            return element;
+          }
+        }
+      });
+      console.log("Результат", this.sportsEquipment);
     });
-
-    alert.addInput({
-      type: "checkbox",
-      label: "Батут",
-      value: "Батут",
-    });
-
-    alert.setTitle("Доступность");
-
-    alert.addInput({
-      type: "checkbox",
-      label: "В наличии",
-      value: "В наличии",
-    });
-
-    alert.addInput({
-      type: "checkbox",
-      label: "На складе",
-      value: "На складе",
-    });
-
-    alert.addButton("Отмена");
-    alert.addButton({
-      text: "Применить",
-      handler: (data) => {
-        console.log("Checkbox data:", data);
-      },
-    });
-
-    alert.present();
   }
 }
