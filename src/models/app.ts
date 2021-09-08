@@ -5,4 +5,7 @@ export interface ISportsEquipment {
   availability: string;
   type: string;
   price: number;
+  manufacturerCountry: string;
+  manufacturer: string;
+  weight: number;
 }

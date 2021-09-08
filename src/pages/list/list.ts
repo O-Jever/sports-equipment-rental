@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
-
-import { NavController, NavParams } from "ionic-angular";
+import { NavController } from "ionic-angular";
 import { ISportsEquipment } from "../../models/app";
+import { ItemDetailsPage } from "../item-details/item-details";
 
 @Component({
   selector: "page-list",
@@ -10,7 +10,7 @@ import { ISportsEquipment } from "../../models/app";
 export class ListPage {
   public sportsEquipment: Array<ISportsEquipment>;
 
-  constructor() {
+  constructor(private navCtrl: NavController) {
     this.sportsEquipment = [
       {
         title: "ALPIN Велотренажер Actuel B-160",
@@ -19,6 +19,9 @@ export class ListPage {
         availability: "В наличии",
         type: "Велотренажер",
         price: 22000,
+        manufacturerCountry: "Китай",
+        manufacturer: "ALPIN",
+        weight: 200,
       },
       {
         title: "GetActive Батут",
@@ -27,6 +30,9 @@ export class ListPage {
         availability: "В наличии",
         type: "Батут",
         price: 4819,
+        manufacturerCountry: "Китай",
+        manufacturer: "GetActive",
+        weight: 200,
       },
       {
         title: "ALPIN Велотренажер мини Rigi B-170",
@@ -35,6 +41,9 @@ export class ListPage {
         availability: "На складе",
         type: "Мини велотренажор",
         price: 4600,
+        manufacturerCountry: "Китай",
+        manufacturer: "ALPIN",
+        weight: 200,
       },
       {
         title: "MELA Коврик для йоги и фитнеса",
@@ -43,6 +52,9 @@ export class ListPage {
         availability: "Нет в наличии",
         type: "Коврик",
         price: 4600,
+        manufacturerCountry: "Китай",
+        manufacturer: "MELA",
+        weight: 200,
       },
       {
         title: "Absolute Champion Настенный турник",
@@ -51,6 +63,9 @@ export class ListPage {
         availability: "Нет в наличии",
         type: "Турник",
         price: 2890,
+        manufacturerCountry: "Китай",
+        manufacturer: "Absolute Champion",
+        weight: 200,
       },
       {
         title: "GOOD LIFE Эспандер",
@@ -59,6 +74,9 @@ export class ListPage {
         availability: "В наличии",
         type: "Эспандер",
         price: 579,
+        manufacturerCountry: "Китай",
+        manufacturer: "GOOD LIF",
+        weight: 200,
       },
       {
         title: "FIT FOR ME Набор для фитнеса",
@@ -67,6 +85,9 @@ export class ListPage {
         availability: "В наличии",
         type: "Коврик",
         price: 939,
+        manufacturerCountry: "Китай",
+        manufacturer: "FIT FOR ME",
+        weight: 200,
       },
       {
         title: "FIT FOR ME Обруч массажный",
@@ -75,6 +96,9 @@ export class ListPage {
         availability: "На складе",
         type: "Обруч",
         price: 936,
+        manufacturerCountry: "Китай",
+        manufacturer: "FIT FOR ME",
+        weight: 200,
       },
       {
         title: "Bodo Доска балансировочная",
@@ -83,6 +107,9 @@ export class ListPage {
         availability: "В наличии",
         type: "Доска",
         price: 3332,
+        manufacturerCountry: "Китай",
+        manufacturer: "Bodo",
+        weight: 200,
       },
       {
         title: "ICON-TRADE Гантели",
@@ -91,6 +118,9 @@ export class ListPage {
         availability: "В наличии",
         type: "Гантели",
         price: 7467,
+        manufacturerCountry: "Китай",
+        manufacturer: "ICON-TRADE",
+        weight: 200,
       },
       {
         title: "Shark Fit Ролики для пресса",
@@ -99,6 +129,9 @@ export class ListPage {
         availability: "В наличии",
         type: "Ролик",
         price: 883,
+        manufacturerCountry: "Китай",
+        manufacturer: "Shark Fit",
+        weight: 200,
       },
       {
         title: "HelloFriends Коврик спортивный",
@@ -107,6 +140,9 @@ export class ListPage {
         availability: "На складе",
         type: "Коврик",
         price: 827,
+        manufacturerCountry: "Китай",
+        manufacturer: "HelloFriends",
+        weight: 200,
       },
       {
         title: "DFC Тренажер для спины",
@@ -115,6 +151,9 @@ export class ListPage {
         availability: "Нет в наличии",
         type: "Тренажер",
         price: 15990,
+        manufacturerCountry: "Китай",
+        manufacturer: "DFC",
+        weight: 200,
       },
       {
         title: "Barbell Atlet Диск для штанги",
@@ -123,6 +162,9 @@ export class ListPage {
         availability: "Нет в наличии",
         type: "Диск",
         price: 990,
+        manufacturerCountry: "Китай",
+        manufacturer: "Barbell Atlet",
+        weight: 200,
       },
       {
         title: "Atletika24 Фитбол",
@@ -131,7 +173,19 @@ export class ListPage {
         availability: "В наличии",
         type: "Фитбол",
         price: 1050,
+        manufacturerCountry: "Китай",
+        manufacturer: "Atletika24",
+        weight: 200,
       },
     ];
+  }
+
+  /**
+   * Переход на страницу с подробным описанием спортивного инвентаря
+   * @param {ISportsEquipment} item - информация об спортивном инвентаре
+   */
+
+  public itemTapped(item: ISportsEquipment): void {
+    this.navCtrl.push(ItemDetailsPage, { item });
   }
 }
