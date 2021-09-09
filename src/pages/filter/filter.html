@@ -10,13 +10,20 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="filterForm">
-    <ion-list-header>Типы</ion-list-header>
+  <form [formGroup]="filterForm" class="filterForm">
+    <ion-list-header>Цене</ion-list-header>
+    <div class="filterForm__inputs">
+      <ion-input margin-right type="number" placeholder="0"></ion-input>
+      <ion-input type="number" placeholder="3332"></ion-input>
+    </div>
 
-    <ion-item *ngFor="let control of dataFilter">
-      <ion-label>{{control.label}}</ion-label>
-      <ion-checkbox formControlName="{{control.name}}"></ion-checkbox>
-    </ion-item>
+    <div *ngFor="let item of dataFilter">
+      <ion-list-header>{{item.title}}</ion-list-header>
+      <ion-item *ngFor="let control of item.controls">
+        <ion-label>{{control.label}}</ion-label>
+        <ion-checkbox formControlName="{{control.name}}"></ion-checkbox>
+      </ion-item>
+    </div>
   </form>
   <button ion-button (click)="dismiss()">Применить</button>
 </ion-content>

@@ -148,14 +148,20 @@ export class ListPage {
 
     modal.onDidDismiss((data) => {
       this.filter = data;
-      this.sportsEquipment = this.sportsEquipment.filter((element) => {
-        for (let key in element) {
-          if (data.find((control) => control.label === element[key])) {
-            return element;
+
+      if (data.length > 0) {
+        console.log("Отфильтрованые данные", !!data);
+
+        this.sportsEquipment = this.loadData().filter((element) => {
+          for (let key in element) {
+            if (data.find((control) => control.label === element[key])) {
+              return element;
+            }
           }
-        }
-      });
-      console.log("Результат", this.sportsEquipment);
+        });
+      } else {
+        this.sportsEquipment = this.loadData();
+      }
     });
   }
 }
