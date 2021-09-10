@@ -10,13 +10,14 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="filterForm" class="filterForm">
+  <form [formGroup]="costForm" class="costForm">
     <ion-list-header>Цене</ion-list-header>
-    <div class="filterForm__inputs">
-      <ion-input margin-right type="number" placeholder="0"></ion-input>
-      <ion-input type="number" placeholder="3332"></ion-input>
+    <div class="costForm__inputs">
+      <ion-input margin-right formControlName="minCost" type="number" min="0" placeholder="0"></ion-input>
+      <ion-input type="number" formControlName="maxCost" min="0" placeholder="3332"></ion-input>
     </div>
-
+  </form>
+  <form [formGroup]="filterForm">
     <div *ngFor="let item of dataFilter">
       <ion-list-header>{{item.title}}</ion-list-header>
       <ion-item *ngFor="let control of item.controls">

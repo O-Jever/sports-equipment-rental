@@ -147,11 +147,10 @@ export class ListPage {
     modal.present();
 
     modal.onDidDismiss((data) => {
+      console.log("Отфильтрованые данные", data);
       this.filter = data;
 
       if (data.length > 0) {
-        console.log("Отфильтрованые данные", !!data);
-
         this.sportsEquipment = this.loadData().filter((element) => {
           for (let key in element) {
             if (data.find((control) => control.label === element[key])) {

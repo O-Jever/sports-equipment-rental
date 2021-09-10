@@ -8,10 +8,16 @@ import { NavController, NavParams, ViewController } from "ionic-angular";
 })
 export class FilterPage {
   public filterForm: FormGroup;
+  public costForm: FormGroup;
   public dataFilter;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController) {
     this.loadData();
+
+    this.costForm = new FormGroup({
+      minCost: new FormControl(null),
+      maxCost: new FormControl(null),
+    });
 
     this.filterForm = new FormGroup({
       inStock: new FormControl(null),
@@ -134,6 +140,6 @@ export class FilterPage {
       }
     }
 
-    this.viewCtrl.dismiss(filteredItems);
+    this.viewCtrl.dismiss(filteredItems, this.costForm.value);
   }
 }
