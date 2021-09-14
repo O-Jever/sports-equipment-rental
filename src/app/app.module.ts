@@ -1,16 +1,17 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule, ErrorHandler } from "@angular/core";
-import { IonicApp, IonicModule, IonicErrorHandler } from "ionic-angular";
-import { MyApp } from "./app.component";
-import { ListPage } from "../pages/list/list";
-import { ReactiveFormsModule } from "@angular/forms";
-import { FilterPage } from "../pages/filter/filter";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { MyApp } from './app.component';
+import { ListPage } from '../pages/list/list';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FilterPage } from '../pages/filter/filter';
+import { ItemDetailsPage } from '../pages/item-details/item-details';
 
 @NgModule({
-  declarations: [MyApp, ListPage, FilterPage],
+  declarations: [MyApp, ListPage, ItemDetailsPage, FilterPage],
   imports: [BrowserModule, IonicModule.forRoot(MyApp), ReactiveFormsModule],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, ListPage, FilterPage],
+  entryComponents: [MyApp, ListPage, ItemDetailsPage, FilterPage],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }],
 })
 export class AppModule {}
