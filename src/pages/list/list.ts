@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { ModalController, NavParams } from 'ionic-angular';
-import { ISportsEquipment } from '../../models/app';
+import { ModalController, NavController, NavParams } from 'ionic-angular';
 import { FilterPage } from '../filter/filter';
-import { NavController } from 'ionic-angular';
+import { ISportsEquipment } from '../../models/app';
 import { ItemDetailsPage } from '../item-details/item-details';
 
 @Component({
