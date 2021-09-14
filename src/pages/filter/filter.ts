@@ -1,10 +1,10 @@
-import { Component } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
-import { NavController, NavParams, ViewController } from "ionic-angular";
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 
 @Component({
-  selector: "page-filter",
-  templateUrl: "filter.html",
+  selector: 'page-filter',
+  templateUrl: 'filter.html',
 })
 export class FilterPage {
   public filterForm: FormGroup;
@@ -37,7 +37,8 @@ export class FilterPage {
       summer: new FormControl(null),
     });
 
-    let selectedItems = navParams.get("filter");
+    let selectedItems = navParams.get('filter');
+    let priceRange = navParams.get('cost');
 
     if (selectedItems) {
       this.filterForm.patchValue(
@@ -47,82 +48,101 @@ export class FilterPage {
         }, {})
       );
     }
+
+    if (priceRange) {
+      this.costForm.patchValue(priceRange);
+    }
   }
 
   private loadData() {
     this.dataFilter = [
       {
-        title: "Наличию",
+        title: 'Наличию',
         controls: [
           {
-            label: "В наличии",
-            name: "inStock",
+            label: 'В наличии',
+            name: 'inStock',
+            typeFilter: 'availability',
           },
           {
-            label: "На складе",
-            name: "inWarehouse",
+            label: 'На складе',
+            name: 'inWarehouse',
+            typeFilter: 'availability',
           },
           {
-            label: "Нет в наличии",
-            name: "notAvalible",
+            label: 'Нет в наличии',
+            name: 'notAvalible',
+            typeFilter: 'availability',
           },
         ],
       },
       {
-        title: "Типу",
+        title: 'Типу',
         controls: [
           {
-            label: "Велотренажер",
-            name: "bike",
+            label: 'Велотренажер',
+            name: 'bike',
+            typeFilter: 'type',
           },
           {
-            label: "Батут",
-            name: "trampoline",
+            label: 'Батут',
+            name: 'trampoline',
+            typeFilter: 'type',
           },
           {
-            label: "Коврик",
-            name: "rug",
+            label: 'Коврик',
+            name: 'rug',
+            typeFilter: 'type',
           },
           {
-            label: "Турник",
-            name: "horizontalBar",
+            label: 'Турник',
+            name: 'horizontalBar',
+            typeFilter: 'type',
           },
           {
-            label: "Эспандер",
-            name: "expander",
+            label: 'Эспандер',
+            name: 'expander',
+            typeFilter: 'type',
           },
           {
-            label: "Обруч",
-            name: "hoop",
+            label: 'Обруч',
+            name: 'hoop',
+            typeFilter: 'type',
           },
           {
-            label: "Доска",
-            name: "board",
+            label: 'Доска',
+            name: 'board',
+            typeFilter: 'type',
           },
         ],
       },
       {
-        title: "Сезонности",
+        title: 'Сезонности',
         controls: [
           {
-            label: "Любой",
-            name: "any",
+            label: 'Любой',
+            name: 'any',
+            typeFilter: 'seasonality',
           },
           {
-            label: "Осень",
-            name: "autumn",
+            label: 'Осень',
+            name: 'autumn',
+            typeFilter: 'seasonality',
           },
           {
-            label: "Зима",
-            name: "winter",
+            label: 'Зима',
+            name: 'winter',
+            typeFilter: 'seasonality',
           },
           {
-            label: "Весна",
-            name: "spring",
+            label: 'Весна',
+            name: 'spring',
+            typeFilter: 'seasonality',
           },
           {
-            label: "Лето",
-            name: "summer",
+            label: 'Лето',
+            name: 'summer',
+            typeFilter: 'seasonality',
           },
         ],
       },
@@ -134,12 +154,12 @@ export class FilterPage {
 
     for (const item of this.dataFilter) {
       for (let key in this.filterForm.value) {
-        if (this.filterForm.value[key] && item.controls.find((control) => control.name === key)) {
-          filteredItems.push(item.controls.find((control) => control.name === key));
+        if (this.filterForm.value[key] && item.controls.find(control => control.name === key)) {
+          filteredItems.push(item.controls.find(control => control.name === key));
         }
       }
     }
 
-    this.viewCtrl.dismiss(filteredItems, this.costForm.value);
+    this.viewCtrl.dismiss({ filteredItems, cost: this.costForm.value });
   }
 }
