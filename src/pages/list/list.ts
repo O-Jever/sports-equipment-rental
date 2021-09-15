@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController, NavParams } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
 import { FilterPage } from '../filter/filter';
 import { ISportsEquipment } from '../../models/app';
 import { ItemDetailsPage } from '../item-details/item-details';
@@ -222,9 +222,11 @@ export class ListPage {
         const availability = data.filteredItems.filter(elemet => elemet.typeFilter === 'availability');
 
         switch (data.filteredItems.length) {
+          case seasonality.length:
+            this.sportsEquipment = this.filteredDataToSeasonalityGroup(seasonality);
+            break;
           case 1:
           case type.length:
-          case seasonality.length:
           case availability.length:
             this.sportsEquipment = this.loadData().filter(element => {
               for (let key in element) {
