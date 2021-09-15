@@ -210,6 +210,11 @@ export class ListPage {
     modal.onDidDismiss(data => {
       this.filter = data.filteredItems;
       this.cost = data.cost;
+      this.sportsEquipment = this.loadData();
+
+      if (data.cost.minCost || data.cost.maxCost) {
+        this.filterPrice(data.cost.minCost, data.cost.maxCost);
+      }
 
       if (data.filteredItems.length) {
         const type = data.filteredItems.filter(elemet => elemet.typeFilter === 'type');
@@ -252,27 +257,7 @@ export class ListPage {
           this.sportsEquipment = this.filteredDataBasedOnTwoGroups(resulAvailability, resultSeasonality);
         }
 
-        if (data.cost.minCost && !data.cost.maxCost) {
-          const resultMinCost = this.loadData().filter(element => element.price > data.cost.minCost);
-
-          this.sportsEquipment = this.filteredDataBasedOnTwoGroups(this.sportsEquipment, resultMinCost);
-        }
-
-        if (!data.cost.minCost && data.cost.maxCost) {
-          const resultMaxCost = this.loadData().filter(element => element.price < data.cost.maxCost);
-
-          this.sportsEquipment = this.filteredDataBasedOnTwoGroups(this.sportsEquipment, resultMaxCost);
-        }
-
-        if (data.cost.minCost && data.cost.maxCost) {
-          const resultCost = this.loadData().filter(
-            element => element.price > data.cost.minCost && element.price < data.cost.maxCost
-          );
-
-          this.sportsEquipment = this.filteredDataBasedOnTwoGroups(this.sportsEquipment, resultCost);
-        }
-      } else {
-        this.sportsEquipment = this.loadData();
+        this.filterPrice(data.cost.minCost, data.cost.maxCost);
       }
     });
   }
@@ -291,6 +276,26 @@ export class ListPage {
     return filterOne.filter(typeFiltered =>
       filterTwo.find(availabilityFileterd => availabilityFileterd.id === typeFiltered.id)
     );
+  }
+
+  private filterPrice(minCost, maxCost) {
+    if (minCost && !maxCost) {
+      const resultMinCost = this.loadData().filter(element => element.price > minCost);
+
+      this.sportsEquipment = this.filteredDataBasedOnTwoGroups(this.sportsEquipment, resultMinCost);
+    }
+
+    if (!minCost && maxCost) {
+      const resultMaxCost = this.loadData().filter(element => element.price < maxCost);
+
+      this.sportsEquipment = this.filteredDataBasedOnTwoGroups(this.sportsEquipment, resultMaxCost);
+    }
+
+    if (minCost && maxCost) {
+      const resultCost = this.loadData().filter(element => element.price > minCost && element.price < maxCost);
+
+      this.sportsEquipment = this.filteredDataBasedOnTwoGroups(this.sportsEquipment, resultCost);
+    }
   }
 
   /**
