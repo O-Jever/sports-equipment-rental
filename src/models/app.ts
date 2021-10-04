@@ -10,3 +10,14 @@ export interface ISportsEquipment {
   manufacturer: string;
   weight: number;
 }
+
+export interface IFilter {
+  title: string;
+  controls: IControl[]
+}
+
+export interface IControl {
+  label: string;
+  name: string;
+  typeFilter: string;
+}
