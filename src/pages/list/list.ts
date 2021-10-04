@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
 
 import { FilterPage } from '../filter/filter';
-import { ISportsEquipment } from '../../models/app';
+import { IControl, ISportsEquipment } from '../../models/app';
 import { ItemDetailsPage } from '../item-details/item-details';
 
 @Component({
@@ -13,13 +13,17 @@ import { ItemDetailsPage } from '../item-details/item-details';
 export class ListPage {
   public sportsEquipment: Array<ISportsEquipment>;
   public filterTerm: string;
-  private filter;
+  private filter: IControl[];
   private cost;
 
   constructor(private modalCtrl: ModalController, private navCtrl: NavController) {
     this.sportsEquipment = this.loadData();
   }
 
+  /**
+   * Заглушка для списка
+   * @returns {ISportsEquipment[]} - массив со спортивным инвентарем
+   */
   private loadData(): ISportsEquipment[] {
     return [
       {
@@ -205,21 +209,20 @@ export class ListPage {
     ];
   }
 
+  /**
+   * Фильтрация спортивного инвентаря по параметрам из фильтра
+   */
   public openFilter(): void {
     const modal = this.modalCtrl.create(FilterPage, { filter: this.filter, cost: this.cost });
     modal.present();
 
     modal.onDidDismiss(data => {
-      this.filter = data.filteredItems;
+      this.filter = data.filterItems;
       this.cost = data.cost;
       this.sportsEquipment = this.loadData();
 
-      if (data.filteredItems.length || data.cost.minCost || data.cost.maxCost) {
-        // const type = data.filteredItems.filter(elemet => elemet.typeFilter === 'type').map(element => element.label);
-        // const seasonality = data.filteredItems.filter(elemet => elemet.typeFilter === 'seasonality').map(element => element.label);
-        // const availability = data.filteredItems.filter(elemet => elemet.typeFilter === 'availability').map(element => element.label);
-
-        const groupedFilterItems = _.groupBy(data.filteredItems, 'typeFilter');
+      if (data.filterItems.length || data.cost.minCost || data.cost.maxCost) {
+        const groupedFilterItems = _.groupBy(data.filterItems, 'typeFilter');
         const filters = {
           seasonality: (element, filterItems) => {
             return filterItems.some(item => element.seasonality.includes(item.label));
@@ -230,54 +233,24 @@ export class ListPage {
           type: (element, filterItems) => {
             return filterItems.some(item => element.type === item.label);
           },
+          minCost: (element, filterItems) => {
+            console.log('minCost', filterItems);
+            return element.price >= filterItems[0].label;
+          },
+          maxCost: (element, filterItems) => {
+            console.log('maxCost', filterItems);
+            return element.price <= filterItems[0].label;
+          },
         };
 
-        this.sportsEquipment = this.loadData().filter((element: ISportsEquipment) => {
-          console.log(data.filteredItems);
-
+        this.sportsEquipment = this.loadData().filter((element: ISportsEquipment) => {       
           return _.every(groupedFilterItems, (filterItems, typeFilter) => {
             return filters[typeFilter](element, filterItems);
-          })
+          });
         });
       
       }
     });
-  }
-
-  private filteredDataToGroup(filterOne): ISportsEquipment[] {
-    return this.loadData().filter(element => filterOne.find(control => control.label === element[control.typeFilter]));
-  }
-
-  private filteredDataToSeasonalityGroup(filterOne): ISportsEquipment[] {
-    return this.loadData().filter(element =>
-      filterOne.find(control => element[control.typeFilter].includes(control.label))
-    );
-  }
-
-  private filteredDataBasedOnTwoGroups(filterOne, filterTwo): ISportsEquipment[] {
-    return filterOne.filter(typeFiltered =>
-      filterTwo.find(availabilityFileterd => availabilityFileterd.id === typeFiltered.id)
-    );
-  }
-
-  private filterPrice(minCost, maxCost) {
-    if (minCost && !maxCost) {
-      const resultMinCost = this.loadData().filter(element => element.price > minCost);
-
-      this.sportsEquipment = this.filteredDataBasedOnTwoGroups(this.sportsEquipment, resultMinCost);
-    }
-
-    if (!minCost && maxCost) {
-      const resultMaxCost = this.loadData().filter(element => element.price < maxCost);
-
-      this.sportsEquipment = this.filteredDataBasedOnTwoGroups(this.sportsEquipment, resultMaxCost);
-    }
-
-    if (minCost && maxCost) {
-      const resultCost = this.loadData().filter(element => element.price > minCost && element.price < maxCost);
-
-      this.sportsEquipment = this.filteredDataBasedOnTwoGroups(this.sportsEquipment, resultCost);
-    }
   }
 
   /**
