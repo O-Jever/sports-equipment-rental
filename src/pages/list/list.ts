@@ -1,5 +1,7 @@
+import _ from 'lodash';
 import { Component } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
+
 import { FilterPage } from '../filter/filter';
 import { ISportsEquipment } from '../../models/app';
 import { ItemDetailsPage } from '../item-details/item-details';
@@ -203,7 +205,7 @@ export class ListPage {
     ];
   }
 
-  public openDialog(): void {
+  public openFilter(): void {
     const modal = this.modalCtrl.create(FilterPage, { filter: this.filter, cost: this.cost });
     modal.present();
 
@@ -212,54 +214,32 @@ export class ListPage {
       this.cost = data.cost;
       this.sportsEquipment = this.loadData();
 
-      if (data.cost.minCost || data.cost.maxCost) {
-        this.filterPrice(data.cost.minCost, data.cost.maxCost);
-      }
+      if (data.filteredItems.length || data.cost.minCost || data.cost.maxCost) {
+        // const type = data.filteredItems.filter(elemet => elemet.typeFilter === 'type').map(element => element.label);
+        // const seasonality = data.filteredItems.filter(elemet => elemet.typeFilter === 'seasonality').map(element => element.label);
+        // const availability = data.filteredItems.filter(elemet => elemet.typeFilter === 'availability').map(element => element.label);
 
-      if (data.filteredItems.length) {
-        const type = data.filteredItems.filter(elemet => elemet.typeFilter === 'type');
-        const seasonality = data.filteredItems.filter(elemet => elemet.typeFilter === 'seasonality');
-        const availability = data.filteredItems.filter(elemet => elemet.typeFilter === 'availability');
+        const groupedFilterItems = _.groupBy(data.filteredItems, 'typeFilter');
+        const filters = {
+          seasonality: (element, filterItems) => {
+            return filterItems.some(item => element.seasonality.includes(item.label));
+          },
+          availability: (element, filterItems) => {
+            return filterItems.some(item => element.availability === item.label);
+          },
+          type: (element, filterItems) => {
+            return filterItems.some(item => element.type === item.label);
+          },
+        };
 
-        switch (data.filteredItems.length) {
-          case seasonality.length:
-            this.sportsEquipment = this.filteredDataToSeasonalityGroup(seasonality);
-            break;
-          case 1:
-          case type.length:
-          case availability.length:
-            this.sportsEquipment = this.loadData().filter(element => {
-              for (let key in element) {
-                if (data.filteredItems.find(control => control.label === element[key])) {
-                  return element;
-                }
-              }
-            });
-            break;
-        }
+        this.sportsEquipment = this.loadData().filter((element: ISportsEquipment) => {
+          console.log(data.filteredItems);
 
-        if (type.length && availability.length) {
-          const resulType = this.filteredDataToGroup(type);
-          const resultAvailability = this.filteredDataToGroup(availability);
-
-          this.sportsEquipment = this.filteredDataBasedOnTwoGroups(resulType, resultAvailability);
-        }
-
-        if (type.length && seasonality.length) {
-          const resulType = this.filteredDataToGroup(type);
-          const resultSeasonality = this.filteredDataToSeasonalityGroup(seasonality);
-
-          this.sportsEquipment = this.filteredDataBasedOnTwoGroups(resulType, resultSeasonality);
-        }
-
-        if (availability.length && seasonality.length) {
-          const resulAvailability = this.filteredDataToGroup(availability);
-          const resultSeasonality = this.filteredDataToSeasonalityGroup(seasonality);
-
-          this.sportsEquipment = this.filteredDataBasedOnTwoGroups(resulAvailability, resultSeasonality);
-        }
-
-        this.filterPrice(data.cost.minCost, data.cost.maxCost);
+          return _.every(groupedFilterItems, (filterItems, typeFilter) => {
+            return filters[typeFilter](element, filterItems);
+          })
+        });
+      
       }
     });
   }
