@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { IFilter } from '../../models/app';
 
 @Component({
   selector: 'page-filter',
@@ -9,7 +10,7 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 export class FilterPage {
   public filterForm: FormGroup;
   public costForm: FormGroup;
-  public dataFilter;
+  public dataFilter: IFilter[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController) {
     this.loadData();
@@ -54,6 +55,9 @@ export class FilterPage {
     }
   }
 
+  /**
+   * Заглушка для фильтра
+   */
   private loadData() {
     this.dataFilter = [
       {
@@ -149,17 +153,34 @@ export class FilterPage {
     ];
   }
 
+  /**
+   * Закрытие модального окна и передача данных в родительский компонент
+   */
   public dismiss(): void {
-    let filteredItems = [];
+    let filterItems = [];
 
     for (const item of this.dataFilter) {
       for (let key in this.filterForm.value) {
         if (this.filterForm.value[key] && item.controls.find(control => control.name === key)) {
-          filteredItems.push(item.controls.find(control => control.name === key));
+          filterItems.push(item.controls.find(control => control.name === key));
         }
       }
     }
 
-    this.viewCtrl.dismiss({ filteredItems, cost: this.costForm.value });
+    if(this.costForm.value.minCost) {
+      filterItems.push({
+        label: this.costForm.value.minCost,
+        typeFilter: 'minCost'
+      });
+    }
+
+    if(this.costForm.value.maxCost) {
+      filterItems.push({
+        label: this.costForm.value.maxCost,
+        typeFilter: 'maxCost'
+      });
+    }
+
+    this.viewCtrl.dismiss({ filterItems, cost: this.costForm.value });
   }
 }
