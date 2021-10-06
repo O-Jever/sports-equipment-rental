@@ -21,3 +21,8 @@ export interface IControl {
   name: string;
   typeFilter: string;
 }
+
+export interface ICost {
+  minCost: number;
+  maxCost: number;
+}

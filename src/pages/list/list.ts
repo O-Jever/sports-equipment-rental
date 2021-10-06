@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
 
 import { FilterPage } from '../filter/filter';
-import { IControl, ISportsEquipment } from '../../models/app';
+import { IControl, ICost, ISportsEquipment } from '../../models/app';
 import { ItemDetailsPage } from '../item-details/item-details';
 
 @Component({
@@ -14,7 +14,7 @@ export class ListPage {
   public sportsEquipment: Array<ISportsEquipment>;
   public filterTerm: string;
   private filter: IControl[];
-  private cost;
+  private cost: ICost;
 
   constructor(private modalCtrl: ModalController, private navCtrl: NavController) {
     this.sportsEquipment = this.loadData();
@@ -221,7 +221,7 @@ export class ListPage {
       this.cost = data.cost;
       this.sportsEquipment = this.loadData();
 
-      if (data.filterItems.length || data.cost.minCost || data.cost.maxCost) {
+      if (data.filterItems.length) {
         const groupedFilterItems = _.groupBy(data.filterItems, 'typeFilter');
         const filters = {
           seasonality: (element, filterItems) => {
@@ -234,11 +234,9 @@ export class ListPage {
             return filterItems.some(item => element.type === item.label);
           },
           minCost: (element, filterItems) => {
-            console.log('minCost', filterItems);
             return element.price >= filterItems[0].label;
           },
           maxCost: (element, filterItems) => {
-            console.log('maxCost', filterItems);
             return element.price <= filterItems[0].label;
           },
         };
