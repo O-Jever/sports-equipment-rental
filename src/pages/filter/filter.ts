@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController } from 'ionic-angular';
 import { IFilter } from '../../models/app';
 
 @Component({
@@ -12,7 +12,7 @@ export class FilterPage {
   public costForm: FormGroup;
   public dataFilter: IFilter[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController) {
+  constructor(public navParams: NavParams, private viewCtrl: ViewController) {
     this.loadData();
 
     this.costForm = new FormGroup({
