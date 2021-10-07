@@ -26,3 +26,11 @@ export interface ICost {
   minCost: number;
   maxCost: number;
 }
+
+export interface IFilters {
+  seasonality: any;
+  availability: any;
+  type: any;
+  minCost: any;
+  maxCost: any;
+} 
