@@ -12,7 +12,6 @@ import { ItemDetailsPage } from '../item-details/item-details';
 })
 export class ListPage {
   public sportsEquipment: Array<ISportsEquipment>;
-  public filterTerm: string;
   private filter: IControl[];
   private cost: ICost;
 
