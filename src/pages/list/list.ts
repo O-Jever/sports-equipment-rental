@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
 
 import { FilterPage } from '../filter/filter';
-import { IControl, ICost, ISportsEquipment } from '../../models/app';
+import { IControl, ICost, IFilters, ISportsEquipment } from '../../models/app';
 import { ItemDetailsPage } from '../item-details/item-details';
 
 @Component({
@@ -209,7 +209,7 @@ export class ListPage {
   }
 
   /**
-   * Фильтрация спортивного инвентаря по параметрам из фильтра
+   * Открытие модального окна с фильтром и передача/возврат даннных в/из него
    */
   public openFilter(): void {
     const modal = this.modalCtrl.create(FilterPage, { filter: this.filter, cost: this.cost });
@@ -221,32 +221,39 @@ export class ListPage {
       this.sportsEquipment = this.loadData();
 
       if (data.filterItems.length) {
-        const groupedFilterItems = _.groupBy(data.filterItems, 'typeFilter');
-        const filters = {
-          seasonality: (element, filterItems) => {
-            return filterItems.some(item => element.seasonality.includes(item.label));
-          },
-          availability: (element, filterItems) => {
-            return filterItems.some(item => element.availability === item.label);
-          },
-          type: (element, filterItems) => {
-            return filterItems.some(item => element.type === item.label);
-          },
-          minCost: (element, filterItems) => {
-            return element.price >= filterItems[0].label;
-          },
-          maxCost: (element, filterItems) => {
-            return element.price <= filterItems[0].label;
-          },
-        };
-
-        this.sportsEquipment = this.loadData().filter((element: ISportsEquipment) => {       
-          return _.every(groupedFilterItems, (filterItems, typeFilter) => {
-            return filters[typeFilter](element, filterItems);
-          });
-        });
-      
+        this.filtetsportsEquipment(data.filterItems);
       }
+    });
+  }
+
+  /**
+   * Фильтрация спортивного инвентаря по параметрам из фильтра
+   * @param {IControl[]} filterItems - параметры фильтрации
+   */
+  private filtetsportsEquipment(filterItems: IControl[]): void {
+    const groupedFilterItems = _.groupBy(filterItems, 'typeFilter');
+    const filters: IFilters = {
+      seasonality: (element, filterItems) => {
+        return filterItems.some(item => element.seasonality.includes(item.label));
+      },
+      availability: (element, filterItems) => {
+        return filterItems.some(item => element.availability === item.label);
+      },
+      type: (element, filterItems) => {
+        return filterItems.some(item => element.type === item.label);
+      },
+      minCost: (element, filterItems) => {
+        return element.price >= filterItems[0].label;
+      },
+      maxCost: (element, filterItems) => {
+        return element.price <= filterItems[0].label;
+      },
+    };
+
+    this.sportsEquipment = this.loadData().filter((element: ISportsEquipment) => {       
+      return _.every(groupedFilterItems, (filterItems, typeFilter) => {
+        return filters[typeFilter](element, filterItems);
+      });
     });
   }
 
