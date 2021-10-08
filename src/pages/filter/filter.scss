@@ -1,0 +1,10 @@
+@import '../../theme/mixins.scss';
+
+page-filter {
+  .costForm {
+    &__inputs {
+      width: 200px;
+      @include flex();
+    }
+  }
+}

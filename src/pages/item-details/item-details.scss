@@ -1,31 +1,33 @@
 @import "../../theme/mixins.scss";
 @import "../../theme/variables.scss";
 
-.selected-item {
-  max-width: $max-width;
-  margin: 0 auto;
-
-  &__info {
-    @include flex(flex-start, flex-start, column);
-
-    @media #{$sm} {
-      @include flex(flex-start, center, row);
+page-item-details {
+  .selected-item {
+    max-width: $max-width;
+    margin: 0 auto;
+  
+    &__info {
+      @include flex(flex-start, flex-start, column);
+  
+      @media #{$sm} {
+        @include flex(flex-start, center, row);
+      }
+  
+      &__img {
+        width: 300px;
+        height: 300px;
+  
+        @media #{$sm} {
+          margin-right: 30px;
+        }
+      }
     }
-
-    &__img {
-      width: 300px;
-      height: 300px;
-
+  
+    &__info > div {
+      margin-left: 30px;
       @media #{$sm} {
         margin-right: 30px;
       }
-    }
-  }
-
-  &__info > div {
-    margin-left: 30px;
-    @media #{$sm} {
-      margin-right: 30px;
     }
   }
 }

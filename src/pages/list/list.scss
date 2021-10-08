@@ -1,16 +1,19 @@
-@import "../../theme/mixins.scss";
+@import '../../theme/mixins.scss';
 
-.sport-equipment {
-  &__title {
-    font-weight: bold;
-  }
-
-  &__info {
-    @include flex();
-
-    &__img {
-      width: 50px;
-      height: 50px;
+page-list {
+  .sport-equipment {
+    &__title {
+      font-weight: bold;
+    }
+  
+    &__info {
+      @include flex();
+      margin-top: 10px;
+  
+      &__img {
+        width: 50px;
+        height: 50px;
+      }
     }
   }
 }

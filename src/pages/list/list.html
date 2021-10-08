@@ -5,7 +5,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <button margin-top float-right ion-button (click)="openFilter()">
+    <ion-icon name="options"></ion-icon>
+  </button>
+  <ion-list *ngIf="sportsEquipment.length > 0; else emptyList">
     <div *ngFor="let item of sportsEquipment" ion-item class="sport-equipment" (click)="itemTapped(item)">
       <div class="sport-equipment__title">{{item.title}}</div>
       <div class="sport-equipment__info">
@@ -18,3 +21,7 @@
     </div>
   </ion-list>
 </ion-content>
+
+<ng-template #emptyList>
+  <h5 margin-left>Ничего не найдено</h5>
+</ng-template>
