@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import { Component } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
-
 import { FilterPage } from '../filter/filter';
 import { IControl, ICost, IFilters, ISportsEquipment } from '../../models/app';
 import { ItemDetailsPage } from '../item-details/item-details';
+import { ContactsPage } from '../contacts/contacts';
 
 @Component({
   selector: 'page-list',
@@ -264,5 +264,12 @@ export class ListPage {
 
   public itemTapped(item: ISportsEquipment): void {
     this.navCtrl.push(ItemDetailsPage, { item });
+  }
+
+  /**
+   * Переход на страницу с контактами компании
+   */
+  public openContactsPage(): void {
+    this.navCtrl.push(ContactsPage);
   }
 }
