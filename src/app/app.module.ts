@@ -1,12 +1,15 @@
-import { MyApp } from './app.component';
-import { ListPage } from '../pages/list/list';
+import { BrowserModule } from '@angular/platform-browser';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+
+import { ContactsPage } from '../pages/contacts/contacts';
 import { FilterPage } from '../pages/filter/filter';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { ContactsPage } from '../pages/contacts/contacts';
+import { ListPage } from '../pages/list/list';
+
+import { MyApp } from './app.component';
 
 @NgModule({
   declarations: [MyApp, ListPage, ItemDetailsPage, FilterPage, ContactsPage],

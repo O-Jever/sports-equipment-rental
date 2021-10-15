@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NavParams, ViewController } from 'ionic-angular';
+
+import { Component } from '@angular/core';
 import { IFilter } from '../../models/app';
 
 @Component({
