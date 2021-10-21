@@ -5,10 +5,10 @@
 </ion-header>
 
 <ion-content>
-  <button margin-top float-right ion-button (click)="openFilter()">
+  <button float-right ion-button (click)="openFilter()">
     <ion-icon name="options"></ion-icon>
   </button>
-  <button margin-top ion-button (click)="openContactsPage()">
+  <button ion-button (click)="openContactsPage()">
     <ion-icon name="contacts"></ion-icon>
   </button>
   <ion-list *ngIf="sportsEquipment.length > 0; else emptyList">
