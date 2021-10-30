@@ -1,10 +1,11 @@
-import _ from 'lodash';
-import { Component } from '@angular/core';
-import { ModalController, NavController } from 'ionic-angular';
-import { FilterPage } from '../filter/filter';
 import { IControl, ICost, IFilters, ISportsEquipment } from '../../models/app';
-import { ItemDetailsPage } from '../item-details/item-details';
+import { ModalController, NavController } from 'ionic-angular';
+
+import { Component } from '@angular/core';
 import { ContactsPage } from '../contacts/contacts';
+import { FilterPage } from '../filter/filter';
+import { ItemDetailsPage } from '../item-details/item-details';
+import _ from 'lodash';
 
 @Component({
   selector: 'page-list',
@@ -243,10 +244,10 @@ export class ListPage {
         return filterItems.some(item => element.type === item.label);
       },
       minCost: (element, filterItems) => {
-        return element.price >= filterItems[0].label;
+        return element.price >= +filterItems[0].label;
       },
       maxCost: (element, filterItems) => {
-        return element.price <= filterItems[0].label;
+        return element.price <= +filterItems[0].label;
       },
     };
 
