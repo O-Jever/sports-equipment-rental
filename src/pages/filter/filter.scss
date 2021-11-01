@@ -7,4 +7,11 @@ page-filter {
       @include flex();
     }
   }
+
+  .filter {
+    &__button {
+      width: 100%;
+      @include flex(center, center);
+    }
+  }
 }

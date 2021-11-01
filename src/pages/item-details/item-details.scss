@@ -30,6 +30,10 @@ page-item-details {
         width: 100%;
         @include flex(center, flex-start, column);
       }
+
+      &__price-and-availability {
+        @include flex(center, center, column);
+      }
     }
   
     &__info > div {

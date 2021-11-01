@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title> Фильтровать по </ion-title>
     <ion-buttons start>
-      <button ion-button (click)="dismiss()">
+      <button ion-button (click)="apply()">
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
@@ -26,5 +26,7 @@
       </ion-item>
     </div>
   </form>
-  <button margin-top ion-button (click)="dismiss()">Применить</button>
+  <div class="filter__button">
+    <button margin-top ion-button (click)="apply()">Применить</button>
+  </div>
 </ion-content>
