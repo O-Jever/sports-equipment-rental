@@ -1,7 +1,8 @@
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+
 import { NavParams, ViewController } from 'ionic-angular';
 
-import { Component } from '@angular/core';
 import { IFilter } from '../../models/app';
 
 @Component({
@@ -168,17 +169,17 @@ export class FilterPage {
       }
     }
 
-    if(this.costForm.value.minCost) {
+    if (this.costForm.value.minCost) {
       filterItems.push({
         label: this.costForm.value.minCost,
-        typeFilter: 'minCost'
+        typeFilter: 'minCost',
       });
     }
 
-    if(this.costForm.value.maxCost) {
+    if (this.costForm.value.maxCost) {
       filterItems.push({
         label: this.costForm.value.maxCost,
-        typeFilter: 'maxCost'
+        typeFilter: 'maxCost',
       });
     }
 

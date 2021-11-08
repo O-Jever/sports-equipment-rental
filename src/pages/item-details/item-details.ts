@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
-import { ISportsEquipment } from "../../models/app";
+
 import { NavParams } from "ionic-angular";
+
+import { ISportsEquipment } from "../../models/app";
 
 @Component({
   selector: "page-item-details",
