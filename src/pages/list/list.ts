@@ -1,10 +1,14 @@
-import _ from 'lodash';
 import { Component } from '@angular/core';
+
 import { ModalController, NavController } from 'ionic-angular';
-import { FilterPage } from '../filter/filter';
-import { IControl, ICost, IFilters, ISportsEquipment } from '../../models/app';
-import { ItemDetailsPage } from '../item-details/item-details';
+
 import { ContactsPage } from '../contacts/contacts';
+import { FilterPage } from '../filter/filter';
+import { ItemDetailsPage } from '../item-details/item-details';
+
+import { IControl, ICost, IFilters, ISportsEquipment } from '../../models/app';
+
+import _ from 'lodash';
 
 @Component({
   selector: 'page-list',

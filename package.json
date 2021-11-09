@@ -33,7 +33,15 @@
   "devDependencies": {
     "@ionic/app-scripts": "3.2.4",
     "@types/lodash": "^4.14.112",
+    "import-sort-parser-typescript-rstyle": "0.0.1",
+    "import-sort-style-rstyle": "0.0.1",
     "typescript": "2.6.2"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "importSort": {
+    ".ts": {
+      "parser": "typescript-rstyle",
+      "style": "rstyle"
+    }
+  }
 }

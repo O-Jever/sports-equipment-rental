@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+
 import { ListPage } from "../pages/list/list";
 
 @Component({
