@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
+
 import { NavParams } from "ionic-angular";
+
 import { ISportsEquipment } from "../../models/app";
 
 @Component({

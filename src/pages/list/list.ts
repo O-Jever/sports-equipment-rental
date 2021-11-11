@@ -1,10 +1,13 @@
-import { IControl, ICost, IFilters, ISportsEquipment } from '../../models/app';
+import { Component } from '@angular/core';
+
 import { ModalController, NavController } from 'ionic-angular';
 
-import { Component } from '@angular/core';
 import { ContactsPage } from '../contacts/contacts';
 import { FilterPage } from '../filter/filter';
 import { ItemDetailsPage } from '../item-details/item-details';
+
+import { IControl, ICost, IFilters, ISportsEquipment } from '../../models/app';
+
 import _ from 'lodash';
 
 @Component({
