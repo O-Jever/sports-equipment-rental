@@ -1,3 +1,15 @@
-page-contacts {
+@import '../../theme/mixins.scss';
 
+page-contacts {
+    .contacts {
+        @include flex(center, center, column);
+
+        &__info {
+            @include flex(flex-start, baseline);
+
+            &__phone {
+                padding-right: 5px;
+            }
+        }
+    }
 }

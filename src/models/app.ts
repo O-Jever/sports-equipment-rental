@@ -28,9 +28,9 @@ export interface ICost {
 }
 
 export interface IFilters {
-  seasonality: any;
-  availability: any;
-  type: any;
-  minCost: any;
-  maxCost: any;
+  seasonality(element: ISportsEquipment, filterItems: IControl[]): boolean;
+  availability(element: ISportsEquipment, filterItems: IControl[]): boolean;
+  type(element: ISportsEquipment, filterItems: IControl[]): boolean;
+  minCost(element: ISportsEquipment, filterItems: IControl[]): boolean;
+  maxCost(element: ISportsEquipment, filterItems: IControl[]): boolean;
 } 

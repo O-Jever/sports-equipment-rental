@@ -158,7 +158,7 @@ export class FilterPage {
   /**
    * Закрытие модального окна и передача данных в родительский компонент
    */
-  public dismiss(): void {
+  public apply(): void {
     let filterItems = [];
 
     for (const item of this.dataFilter) {

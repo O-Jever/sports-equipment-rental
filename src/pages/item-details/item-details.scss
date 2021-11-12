@@ -5,9 +5,13 @@ page-item-details {
   .selected-item {
     max-width: $max-width;
     margin: 0 auto;
+
+    &__title {
+      margin: 10px;
+    }
   
     &__info {
-      @include flex(flex-start, flex-start, column);
+      @include flex(center, center, column);
   
       @media #{$sm} {
         @include flex(flex-start, center, row);
@@ -21,10 +25,18 @@ page-item-details {
           margin-right: 30px;
         }
       }
+
+      &__specifications {
+        width: 100%;
+        @include flex(center, flex-start, column);
+      }
+
+      &__price-and-availability {
+        @include flex(center, center, column);
+      }
     }
   
     &__info > div {
-      margin-left: 30px;
       @media #{$sm} {
         margin-right: 30px;
       }

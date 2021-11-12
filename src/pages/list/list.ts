@@ -247,10 +247,10 @@ export class ListPage {
         return filterItems.some(item => element.type === item.label);
       },
       minCost: (element, filterItems) => {
-        return element.price >= filterItems[0].label;
+        return element.price >= +filterItems[0].label;
       },
       maxCost: (element, filterItems) => {
-        return element.price <= filterItems[0].label;
+        return element.price <= +filterItems[0].label;
       },
     };
 

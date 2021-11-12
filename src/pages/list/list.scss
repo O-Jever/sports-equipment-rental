@@ -14,6 +14,11 @@ page-list {
         width: 50px;
         height: 50px;
       }
+
+      &__price-and-availability {
+        @include flex(space-between, center, column);
+        width: 100px;
+      }
     }
   }
 }
