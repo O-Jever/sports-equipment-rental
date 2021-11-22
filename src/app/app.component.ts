@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
+import {Component} from "@angular/core";
 
-import { ListPage } from "../pages/list/list";
+import {ListPage} from "../pages/list/list";
 
 @Component({
-  templateUrl: "app.html",
+    templateUrl: "app.html",
 })
 export class MyApp {
-  rootPage = ListPage;
-  constructor() {}
+    rootPage = ListPage;
+    constructor() {}
 }
